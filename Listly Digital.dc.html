@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=DM+Mono:wght@400;500&family=Noto+Sans+Bengali:wght@400;500&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#ECEEF2;color:#0E1726;font-family:'DM Sans','Noto Sans Bengali',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#1D5BF0;text-decoration:none}
+a:hover{color:#1447C4;text-decoration:underline}
+</style>
+</helmet>
+
+<section data-screen-label="Intro" style="padding:96px 80px 32px;display:flex;flex-direction:column;gap:40px">
+  <div style="display:flex;flex-direction:column;gap:16px;max-width:960px">
+    <div style="font-family:'DM Mono',monospace;font-size:13px;color:#6B7280">LISTLY DIGITAL — v2 · digital products · each listing gets its own page and links out to the creator’s store · <a href="Listly.dc.html">v1 physical marketplace</a></div>
+    <h1 style="margin:0;font-size:64px;line-height:1.02;font-weight:500;letter-spacing:-0.035em">A calm home for the things people make.</h1>
+    <p style="margin:0;font-size:18px;line-height:1.6;color:#4A5363;max-width:680px;text-wrap:pretty">Templates, ebooks, presets, fonts, courses, plugins. Creators paste a link and get a product page. Buyers find things here and buy on the creator’s own site.</p>
+  </div>
+  <div style="width:1280px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px">
+    <div style="border-radius:20px;background:rgba(255,255,255,.75);border:1px solid #fff;padding:24px;display:flex;flex-direction:column;gap:10px"><div style="font-family:'DM Mono',monospace;font-size:12px;color:#6B7280">01 · LINK FIRST</div><div style="font-size:18px;font-weight:500">Most creators already sell somewhere</div><div style="font-size:15px;line-height:1.55;color:#4A5363">Gumroad, Lemon Squeezy, Payhip, their own site. Listing starts by pasting that link, and we fill in the title, cover and price from it.</div></div>
+    <div style="border-radius:20px;background:rgba(255,255,255,.75);border:1px solid #fff;padding:24px;display:flex;flex-direction:column;gap:10px"><div style="font-family:'DM Mono',monospace;font-size:12px;color:#6B7280">02 · TRUST BEFORE THE CLICK</div><div style="font-size:18px;font-weight:500">Show exactly where the link goes</div><div style="font-size:15px;line-height:1.55;color:#4A5363">Buyers can’t hold a file in their hands. Each page shows the destination domain, the file format, what works with it, and when it was last updated.</div></div>
+    <div style="border-radius:20px;background:rgba(255,255,255,.75);border:1px solid #fff;padding:24px;display:flex;flex-direction:column;gap:10px"><div style="font-family:'DM Mono',monospace;font-size:12px;color:#6B7280">03 · A PAGE WORTH SHARING</div><div style="font-size:18px;font-weight:500">Every product gets a clean URL</div><div style="font-size:15px;line-height:1.55;color:#4A5363">listly.co/p/… for each product and listly.co/@name for the creator. Easy to drop into a bio, a WhatsApp group or a Facebook post.</div></div>
+    <div style="border-radius:20px;background:rgba(255,255,255,.75);border:1px solid #fff;padding:24px;display:flex;flex-direction:column;gap:10px"><div style="font-family:'DM Mono',monospace;font-size:12px;color:#6B7280">04 · CLICKS, NOT INQUIRIES</div><div style="font-size:18px;font-weight:500">Stats creators actually need</div><div style="font-size:15px;line-height:1.55;color:#4A5363">Page views and link clicks per product. We check every link daily and say so in plain language when one breaks.</div></div>
+  </div>
+</section>
+
+<section data-screen-label="01 New components" style="padding:48px 80px;display:flex;flex-direction:column;gap:24px">
+  <div style="font-family:'DM Mono',monospace;font-size:13px;color:#6B7280">01 — WHAT’S NEW IN THE SYSTEM · colors, type and base components are unchanged from v1</div>
+  <div style="width:1280px;border-radius:32px;padding:16px;border:1px solid #fff;box-shadow:0 40px 100px -40px rgba(20,35,80,.18);background:radial-gradient(120% 90% at 0% 100%,#C9D6FB 0%,rgba(201,214,251,0) 55%),radial-gradient(100% 90% at 100% 100%,#C6F1FC 0%,rgba(198,241,252,0) 60%),#F3F6FD">
+    <div style="background:rgba(255,255,255,.82);border-radius:24px;padding:48px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:48px 40px">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="font-size:13px;color:#6B7280">Link input, with preview pulled from the URL</div>
+        <div style="height:56px;border-radius:16px;border:1px solid #1D5BF0;box-shadow:0 0 0 4px rgba(29,91,240,.14);background:#fff;padding:0 16px;display:flex;align-items:center;gap:10px;font-size:16px"><span style="width:18px;height:18px;border-radius:999px;border:1.5px solid #6B7280;flex:none"></span><span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">rumana.gumroad.com/l/invoice-kit</span></div>
+        <div style="border-radius:16px;border:1px solid #E6E8EC;background:#fff;padding:10px;display:flex;gap:12px;align-items:center"><div style="flex:none;width:72px;height:54px;border-radius:10px;background:repeating-linear-gradient(135deg,#EDF0F5 0px,#EDF0F5 8px,#E6EAF1 8px,#E6EAF1 16px)"></div><div style="min-width:0;display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;font-weight:500">Freelance invoice kit</span><span style="font-size:13px;color:#6B7280">gumroad.com · Free</span></div></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="font-size:13px;color:#6B7280">Outbound button: always shows the destination</div>
+        <button style="height:56px;border-radius:999px;border:none;background:#1D5BF0;color:#fff;font:500 16px 'DM Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 10px 22px -10px rgba(29,91,240,.75)">Get it on gumroad.com<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"></path></svg></button>
+        <div style="font-size:13px;color:#6B7280;line-height:1.5">Opens in a new tab. Listly takes no cut, and the buyer pays the creator directly.</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="font-size:13px;color:#6B7280">Price type · format tags · link health</div>
+        <div style="display:flex;padding:4px;border-radius:999px;background:#EEF0F4;width:280px">
+          <span style="flex:1;height:40px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:14px;color:#4A5363">Free</span>
+          <span style="flex:1;height:40px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:500;background:#fff;box-shadow:0 1px 3px rgba(15,23,42,.1)">Paid</span>
+          <span style="flex:1;height:40px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:14px;color:#4A5363">Pay what you want</span>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap"><span style="height:28px;padding:0 10px;border-radius:8px;background:#F1F3F6;font-family:'DM Mono',monospace;font-size:12px;display:flex;align-items:center">NOTION</span><span style="height:28px;padding:0 10px;border-radius:8px;background:#F1F3F6;font-family:'DM Mono',monospace;font-size:12px;display:flex;align-items:center">FIGMA</span><span style="height:28px;padding:0 10px;border-radius:8px;background:#F1F3F6;font-family:'DM Mono',monospace;font-size:12px;display:flex;align-items:center">PDF</span><span style="height:28px;padding:0 10px;border-radius:8px;background:#F1F3F6;font-family:'DM Mono',monospace;font-size:12px;display:flex;align-items:center">XMP</span></div>
+        <div style="display:flex;gap:8px"><span style="height:26px;padding:0 10px;border-radius:999px;background:#EAF0FE;color:#1447C4;font-size:12px;font-weight:500;display:flex;align-items:center">Live</span><span style="height:26px;padding:0 10px;border-radius:999px;background:#EEF0F4;color:#4A5363;font-size:12px;font-weight:500;display:flex;align-items:center">Draft</span><span style="height:26px;padding:0 10px;border-radius:999px;background:#FDF1DF;color:#8A4B00;font-size:12px;font-weight:500;display:flex;align-items:center">Link not working</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="02 Desktop" style="padding:48px 80px;display:flex;flex-direction:column;gap:24px">
+  <div style="font-family:'DM Mono',monospace;font-size:13px;color:#6B7280">02 — DESKTOP · 1280</div>
+  <div style="display:flex;flex-wrap:wrap;gap:64px;align-items:flex-start">
+
+    <div data-screen-label="D1 Discover" style="display:flex;flex-direction:column;gap:12px">
+      <div style="font-family:'DM Mono',monospace;font-size:12px;color:#6B7280">D1 — Discover</div>
+      <div style="width:1280px;border-radius:24px;overflow:hidden;background:#FAFAFB;border:1px solid #fff;box-shadow:0 40px 100px -40px rgba(20,35,80,.2)">
+        <div style="height:72px;padding:0 40px;display:flex;align-items:center;justify-content:space-between">
+          <div style="display:flex;align-items:center;gap:9px"><div style="width:24px;height:24px;border-radius:8px;background:#0E1726;display:flex;align-items:center;justify-content:center"><div style="width:9px;height:9px;border-radius:9px;background:#fff"></div></div><span style="font-size:19px;font-weight:500;letter-spacing:-0.02em">Listly</span></div>
+          <div style="display:flex;align-items:center;gap:12px"><button style="height:44px;padding:0 20px;border-radius:999px;border:none;background:#1D5BF0;color:#fff;font:500 15px 'DM Sans',sans-serif;box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 8px 18px -8px rgba(29,91,240,.7);cursor:pointer" style-hover="background:#1650DA">List a product</button><div style="width:40px;height:40px;border-radius:999px;background:#DCE4FB;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:500;color:#1447C4">RA</div></div>
+        </div>
+        <div style="margin:0 24px;border-radius:28px;border:1px solid #fff;padding:88px 40px 96px;display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center;background:radial-gradient(120% 90% at 0% 100%,#C9D6FB 0%,rgba(201,214,251,0) 55%),radial-gradient(100% 90% at 100% 100%,#C6F1FC 0%,rgba(198,241,252,0) 60%),#F3F6FD">
+          <h1 style="margin:0;font-size:56px;line-height:1.05;font-weight:500;letter-spacing:-0.03em">Things people make,<br>ready to download.</h1>
+          <p style="margin:0;font-size:17px;color:#4A5363">Templates, ebooks, presets, fonts and courses from independent creators.</p>
+          <div style="margin-top:16px;width:680px;height:64px;border-radius:999px;background:#fff;border:1px solid #E3E6EB;box-shadow:0 12px 32px -14px rgba(20,35,80,.22);display:flex;align-items:center;gap:12px;padding:0 8px 0 24px">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
+            <span style="flex:1;text-align:left;font-size:17px;color:#6B7280">Try “notion budget” or “lightroom presets”</span>
+            <button style="height:48px;padding:0 24px;border-radius:999px;border:none;background:#0E1726;color:#fff;font:500 15px 'DM Sans',sans-serif">Search</button>
+          </div>
+        </div>
+        <div style="padding:40px 40px 0;display:flex;align-items:center;justify-content:space-between;gap:24px">
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span style="height:40px;padding:0 16px;border-radius:999px;background:#0E1726;color:#fff;font-size:14px;font-weight:500;display:flex;align-items:center">All</span>
+            <sc-for list="{{ cats }}" as="c" hint-placeholder-count="7"><span style="height:40px;padding:0 16px;border-radius:999px;background:#fff;border:1px solid #E6E8EC;font-size:14px;display:flex;align-items:center">{{ c }}</span></sc-for>
+          </div>
+          <div style="flex:none;display:flex;padding:4px;border-radius:999px;background:#EEF0F4"><span style="height:32px;padding:0 14px;border-radius:999px;display:flex;align-items:center;font-size:13px;font-weight:500;background:#fff;box-shadow:0 1px 3px rgba(15,23,42,.1)">Any price</span><span style="height:32px;padding:0 14px;border-radius:999px;display:flex;align-items:center;font-size:13px;color:#4A5363">Free</span></div>
+        </div>
+        <div style="padding:40px 40px 16px;display:flex;align-items:baseline;justify-content:space-between"><h2 style="margin:0;font-size:22px;font-weight:500;letter-spacing:-0.01em">New this week</h2><span style="font-size:14px;color:#6B7280">312 products</span></div>
+        <div style="padding:0 40px 56px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:40px 24px">
+          <sc-for list="{{ products }}" as="p" hint-placeholder-count="8">
+            <div style="display:flex;flex-direction:column;gap:6px;cursor:pointer">
+              <div style="aspect-ratio:4/3;border-radius:16px;margin-bottom:8px;background:repeating-linear-gradient(135deg,#EDF0F5 0px,#EDF0F5 10px,#E6EAF1 10px,#E6EAF1 20px);display:flex;align-items:flex-end;justify-content:space-between;padding:10px"><span style="font-family:'DM Mono',monospace;font-size:11px;color:#6B7280;background:rgba(255,255,255,.85);padding:3px 7px;border-radius:6px">{{ p.shot }}</span><span style="font-family:'DM Mono',monospace;font-size:11px;background:rgba(255,255,255,.92);padding:3px 7px;border-radius:6px">{{ p.format }}</span></div>
+              <div style="font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ p.title }}</div>
+              <div style="display:flex;justify-content:space-between;gap:12px;font-size:13px;color:#6B7280"><span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ p.creator }}</span><span style="font-size:15px;font-weight:500;color:#0E1726">{{ p.price }}</span></div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+
+    <div data-screen-label="D2 Product page" style="display:flex;flex-direction:column;gap:12px">
+      <div style="font-family:'DM Mono',monospace;font-size:12px;color:#6B7280">D2 — Product page · listly.co/p/dhaka-streets-presets</div>
+      <div style="width:1280px;border-radius:24px;overflow:hidden;background:#FAFAFB;border:1px solid #fff;box-shadow:0 40px 100px -40px rgba(20,35,80,.2)">
+        <div style="height:72px;padding:0 40px;display:flex;align-items:center;justify-content:space-between;gap:24px;border-bottom:1px solid #EEF0F3">
+          <div style="display:flex;align-items:center;gap:9px"><div style="width:24px;height:24px;border-radius:8px;background:#0E1726;display:flex;align-items:center;justify-content:center"><div style="width:9px;height:9px;border-radius:9px;background:#fff"></div></div><span style="font-size:19px;font-weight:500;letter-spacing:-0.02em">Listly</span></div>
+          <div style="flex:1;max-width:440px;height:44px;border-radius:999px;background:#F1F3F6;display:flex;align-items:center;gap:10px;padding:0 16px;color:#6B7280;font-size:15px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>Search Listly</div>
+          <div style="display:flex;align-items:center;gap:12px"><button style="height:44px;padding:0 20px;border-radius:999px;border:1px solid #E3E6EB;background:#fff;color:#0E1726;font:500 15px 'DM Sans',sans-serif">List a product</button><div style="width:40px;height:40px;border-radius:999px;background:#DCE4FB;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:500;color:#1447C4">RA</div></div>
+        </div>
+        <div style="padding:32px 40px 0;display:flex;align-items:center;gap:6px;font-size:14px;color:#6B7280"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg>Photo presets</div>
+        <div style="padding:24px 40px 64px;display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:56px;align-items:start">
+          <div style="display:flex;flex-direction:column;gap:40px">
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div style="aspect-ratio:16/10;border-radius:24px;background:repeating-linear-gradient(135deg,#EDF0F5 0px,#EDF0F5 12px,#E6EAF1 12px,#E6EAF1 24px);display:flex;align-items:flex-end;justify-content:space-between;padding:20px"><span style="font-family:'DM Mono',monospace;font-size:12px;color:#6B7280;background:rgba(255,255,255,.85);padding:4px 8px;border-radius:6px">cover — before / after, 1600×1000</span><span style="font-size:13px;background:rgba(255,255,255,.9);padding:6px 12px;border-radius:999px">1 / 6</span></div>
+              <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:10px">
+                <div style="aspect-ratio:4/3;border-radius:12px;border:2px solid #0E1726;background:repeating-linear-gradient(135deg,#EDF0F5 0px,#EDF0F5 8px,#E6EAF1 8px,#E6EAF1 16px)"></div>
+                <div style="aspect-ratio:4/3;border-radius:12px;background:repeating-linear-gradient(135deg,#EDF0F5 0px,#EDF0F5 8px,#E6EAF1 8px,#E6EAF1 16px)"></div>
+                <div style="aspect-ratio:4/3;border-radius:12px;background:repeating-linear-gradient(135deg,#EDF0F5 0px,#EDF0F5 8px,#E6EAF1 8px,#E6EAF1 16px)"></div>
+                <div style="aspect-ratio:4/3;border-radius:12px;background:repeating-linear-gradient(135deg,#EDF0F5 0px,#EDF0F5 8px,#E6EAF1 8px,#E6EAF1 16px)"></div>
+                <div style="aspect-ratio:4/3;border-radius:12px;background:repeating-linear-gradient(135deg,#EDF0F5 0px,#EDF0F5 8px,#E6EAF1 8px,#E6EAF1 16px)"></div>
+                <div style="aspect-ratio:4/3;border-radius:12px;background:repeating-linear-gradient(135deg,#EDF0F5 0px,#EDF0F5 8px,#E6EAF1 8px,#E6EAF1 16px)"></div>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:14px;max-width:640px">
+              <h2 style="margin:0;font-size:20px;font-weight:500">About</h2>
+              <p style="margin:0;font-size:16px;line-height:1.7;color:#4A5363;text-wrap:pretty">Forty presets built from three years of shooting Old Dhaka at dusk. Warm rickshaw neon, soft monsoon greys, clean skin tones. Tuned for phone photos as much as camera RAW files.</p>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:14px;max-width:640px">
+              <h2 style="margin:0;font-size:20px;font-weight:500">What’s included</h2>
+              <div style="display:flex;flex-direction:column;border-top:1px solid #EEF0F3">
+                <div style="display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid #EEF0F3;font-size:15px"><span>40 presets for Lightroom Classic &amp; CC</span><span style="font-family:'DM Mono',monospace;font-size:12px;color:#6B7280">XMP</span></div>
+                <div style="display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid #EEF0F3;font-size:15px"><span>Mobile versions for Lightroom app</span><span style="font-family:'DM Mono',monospace;font-size:12px;color:#6B7280">DNG</span></div>
+                <div style="display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid #EEF0F3;font-size:15px"><span>Install guide, English and Bangla</span><span style="font-family:'DM Mono',monospace;font-size:12px;color:#6B7280">PDF</span></div>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:20px;border-radius:24px;background:#fff;border:1px solid #E6E8EC;padding:28px">
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <h1 style="margin:0;font-size:30px;line-height:1.15;font-weight:500;letter-spacing:-0.025em">Dhaka Streets — 40 Lightroom presets</h1>
+              <p style="margin:0;font-size:15px;line-height:1.55;color:#4A5363">Warm, cinematic edits for city photos.</p>
+            </div>
+            <div style="font-size:28px;font-weight:500;letter-spacing:-0.01em">৳850</div>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <button style="height:56px;border-radius:999px;border:none;background:#1D5BF0;color:#fff;font:500 16px 'DM Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 10px 22px -10px rgba(29,91,240,.75);cursor:pointer" style-hover="background:#1650DA">Get it on gumroad.com<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"></path></svg></button>
+              <div style="font-size:13px;color:#6B7280;text-align:center">You’ll pay the creator directly on their store.</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px 16px;padding:18px 0;border-top:1px solid #EEF0F3;border-bottom:1px solid #EEF0F3">
+              <div style="display:flex;flex-direction:column;gap:3px"><span style="font-size:13px;color:#6B7280">Works with</span><span style="font-size:15px">Lightroom</span></div>
+              <div style="display:flex;flex-direction:column;gap:3px"><span style="font-size:13px;color:#6B7280">Format</span><span style="font-size:15px">XMP, DNG</span></div>
+              <div style="display:flex;flex-direction:column;gap:3px"><span style="font-size:13px;color:#6B7280">Size</span><span style="font-size:15px">24 MB</span></div>
+              <div style="display:flex;flex-direction:column;gap:3px"><span style="font-size:13px;color:#6B7280">Updated</span><span style="font-size:15px">Sep 2026</span></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px">
+              <div style="width:44px;height:44px;border-radius:999px;background:#DCF3F9;display:flex;align-items:center;justify-content:center;font-weight:500;color:#0B5A6E">TH</div>
+              <div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;font-weight:500">Tanvir Hasan</span><span style="font-size:13px;color:#6B7280">Photographer · 6 products</span></div>
+              <a href="#" style="font-size:14px;font-weight:500">View page</a>
+            </div>
+          </div>
+        </div>
+        <div style="padding:0 40px 56px;display:flex;flex-direction:column;gap:20px">
+          <h2 style="margin:0;font-size:22px;font-weight:500;letter-spacing:-0.01em">More from Tanvir</h2>
+          <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px">
+            <sc-for list="{{ more }}" as="p" hint-placeholder-count="4">
+              <div style="display:flex;flex-direction:column;gap:6px">
+                <div style="aspect-ratio:4/3;border-radius:16px;margin-bottom:8px;background:repeating-linear-gradient(135deg,#EDF0F5 0px,#EDF0F5 10px,#E6EAF1 10px,#E6EAF1 20px);display:flex;align-items:flex-end;justify-content:flex-end;padding:10px"><span style="font-family:'DM Mono',monospace;font-size:11px;background:rgba(255,255,255,.92);padding:3px 7px;border-radius:6px">{{ p.format }}</span></div>
+                <div style="font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ p.title }}</div>
+                <div style="font-size:15px;font-weight:500">{{ p.price }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div data-screen-label="D3 Creator page" style="display:flex;flex-direction:column;gap:12px">
+      <div style="font-family:'DM Mono',monospace;font-size:12px;color:#6B7280">D3 — Creator page · listly.co/@tanvir · the link creators put in their bio</div>
+      <div style="width:1280px;border-radius:24px;overflow:hidden;background:#FAFAFB;border:1px solid #fff;box-shadow:0 40px 100px -40px rgba(20,35,80,.2)">
+        <div style="height:72px;padding:0 40px;display:flex;align-items:center;justify-content:space-between">
+          <div style="display:flex;align-items:center;gap:9px"><div style="width:24px;height:24px;border-radius:8px;background:#0E1726;display:flex;align-items:center;justify-content:center"><div style="width:9px;height:9px;border-radius:9px;background:#fff"></div></div><span style="font-size:19px;font-weight:500;letter-spacing:-0.02em">Listly</span></div>
+          <button style="height:44px;padding:0 20px;border-radius:999px;border:1px solid #E3E6EB;background:#fff;color:#0E1726;font:500 15px 'DM Sans',sans-serif">Share page</button>
+        </div>
+        <div style="margin:0 24px;border-radius:28px;border:1px solid #fff;padding:56px;display:flex;align-items:center;gap:32px;background:radial-gradient(120% 90% at 0% 100%,#C9D6FB 0%,rgba(201,214,251,0) 55%),radial-gradient(100% 90% at 100% 100%,#C6F1FC 0%,rgba(198,241,252,0) 60%),#F3F6FD">
+          <div style="flex:none;width:112px;height:112px;border-radius:999px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:36px;font-weight:500;color:#0B5A6E;box-shadow:0 12px 30px -14px rgba(20,35,80,.3)">TH</div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <h1 style="margin:0;font-size:44px;line-height:1.05;font-weight:500;letter-spacing:-0.03em">Tanvir Hasan</h1>
+            <p style="margin:0;font-size:17px;line-height:1.55;color:#4A5363;max-width:560px">Street photographer in Dhaka. I make the presets and guides I wish I’d had when I started.</p>
+            <div style="display:flex;gap:16px;font-size:14px;color:#4A5363"><span>tanvir.photo</span><span>Instagram</span><span>Member since 2023</span></div>
+          </div>
+        </div>
+        <div style="padding:40px 40px 16px;font-size:22px;font-weight:500">6 products</div>
+        <div style="padding:0 40px 56px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px 24px">
+          <sc-for list="{{ creatorProducts }}" as="p" hint-placeholder-count="6">
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <div style="aspect-ratio:4/3;border-radius:18px;margin-bottom:8px;background:repeating-linear-gradient(135deg,#EDF0F5 0px,#EDF0F5 10px,#E6EAF1 10px,#E6EAF1 20px);display:flex;align-items:flex-end;justify-content:flex-end;padding:12px"><span style="font-family:'DM Mono',monospace;font-size:11px;background:rgba(255,255,255,.92);padding:3px 7px;border-radius:6px">{{ p.format }}</span></div>
+              <div style="font-size:17px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ p.title }}</div>
+              <div style="font-size:15px;font-weight:500">{{ p.price }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<section data-screen-label="03 Desktop creator tools" style="padding:48px 80px;display:flex;flex-direction:column;gap:24px">
+  <div style="font-family:'DM Mono',monospace;font-size:13px;color:#6B7280">03 — LIST A PRODUCT · DESKTOP · Link → Details → Review → Live · sign-in is the same as v1 and appears on Publish</div>
+  <div style="display:flex;flex-wrap:wrap;gap:64px;align-items:flex-start">
+
+    <div data-screen-label="D4.1 Link" style="display:flex;flex-direction:column;gap:12px">
+      <div style="font-family:'DM Mono',monospace;font-size:12px;color:#6B7280">D4.1 — Paste your link (preview pulled from the URL)</div>
+      <div style="width:1280px;height:820px;display:flex;flex-direction:column;border-radius:24px;overflow:hidden;border:1px solid #fff;box-shadow:0 40px 100px -40px rgba(20,35,80,.2);background:radial-gradient(90% 60% at 0% 100%,#D7E0FC 0%,rgba(215,224,252,0) 60%),radial-gradient(80% 60% at 100% 100%,#D3F4FC 0%,rgba(211,244,252,0) 60%),#FAFAFB">
+        <div style="height:72px;padding:0 40px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center">
+          <div style="display:flex;align-items:center;gap:9px"><div style="width:24px;height:24px;border-radius:8px;background:#0E1726;display:flex;align-items:center;justify-content:center"><div style="width:9px;height:9px;border-radius:9px;background:#fff"></div></div><span style="font-size:19px;font-weight:500;letter-spacing:-0.02em">Listly</span></div>
+          <div style="display:flex;gap:24px;font-size:14px"><div style="display:flex;flex-direction:column;gap:8px;width:120px"><div style="height:4px;border-radius:4px;background:#0E1726"></div><span style="font-weight:500">1 Link</span></div><div style="display:flex;flex-direction:column;gap:8px;width:120px"><div style="height:4px;border-radius:4px;background:#DDE1E8"></div><span style="color:#6B7280">2 Details</span></div><div style="display:flex;flex-direction:column;gap:8px;width:120px"><div style="height:4px;border-radius:4px;background:#DDE1E8"></div><span style="color:#6B7280">3 Review</span></div></div>
+          <div style="display:flex;justify-content:flex-end;align-items:center;gap:8px;font-size:14px;color:#6B7280">Draft saved<button style="height:44px;padding:0 18px;border-radius:999px;border:none;background:transparent;color:#4A5363;font:500 15px 'DM Sans',sans-serif">Exit</button></div>
+        </div>
+        <div style="flex:1;width:640px;margin:0 auto;padding-top:72px;display:flex;flex-direction:column;gap:28px">
+          <div style="display:flex;flex-direction:column;gap:8px"><h1 style="margin:0;font-size:40px;font-weight:500;letter-spacing:-0.03em">Where do people get it?</h1><p style="margin:0;font-size:16px;line-height:1.55;color:#4A5363">Paste the link to your product: Gumroad, Payhip, Notion, Google Drive or your own site.</p></div>
+          <label style="display:flex;flex-direction:column;gap:8px"><span style="font-size:14px;font-weight:500">Product link</span><span style="height:60px;border-radius:16px;border:1px solid #1D5BF0;box-shadow:0 0 0 4px rgba(29,91,240,.14);background:#fff;padding:0 8px 0 18px;display:flex;align-items:center;gap:12px;font-size:17px"><span style="flex:1">https://tanvir.gumroad.com/l/dhaka-streets</span><span style="height:40px;padding:0 14px;border-radius:999px;background:#F1F3F6;font-size:14px;font-weight:500;display:flex;align-items:center">Paste</span></span></label>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;align-items:center;gap:8px;font-size:14px;color:#1447C4"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Found it. We filled in what we could.</div>
+            <div style="border-radius:20px;background:#fff;border:1px solid #fff;box-shadow:0 16px 40px -22px rgba(20,35,80,.28);padding:12px;display:flex;gap:16px;align-items:center">
+              <div style="flex:none;width:160px;aspect-ratio:4/3;border-radius:12px;background:repeating-linear-gradient(135deg,#EDF0F5 0px,#EDF0F5 8px,#E6EAF1 8px,#E6EAF1 16px);display:flex;align-items:flex-end;padding:8px"><span style="font-family:'DM Mono',monospace;font-size:10px;color:#6B7280;background:rgba(255,255,255,.85);padding:2px 6px;border-radius:5px">cover from link</span></div>
+              <div style="display:flex;flex-direction:column;gap:4px"><span style="font-size:13px;color:#6B7280">gumroad.com</span><span style="font-size:18px;font-weight:500">Dhaka Streets — 40 Lightroom presets</span><span style="font-size:15px">৳850</span></div>
+            </div>
+          </div>
+        </div>
+        <div style="height:88px;padding:0 40px;display:flex;align-items:center;justify-content:flex-end;border-top:1px solid rgba(255,255,255,.8)">
+          <button style="height:52px;padding:0 32px;border-radius:999px;border:none;background:#1D5BF0;color:#fff;font:500 16px 'DM Sans',sans-serif;box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 10px 22px -10px rgba(29,91,240,.75)">Continue</button>
+        </div>
+      </div>
+    </div>
+
+    <div data-screen-label="D4.2 Details" style="display:flex;flex-direction:column;gap:12px">
+      <div style="font-family:'DM Mono',monospace;font-size:12px;color:#6B7280">D4.2 — Details (prefilled, everything editable)</div>
+      <div style="width:1280px;height:820px;display:flex;flex-direction:column;border-radius:24px;overflow:hidden;border:1px solid #fff;box-shadow:0 40px 100px -40px rgba(20,35,80,.2);background:radial-gradient(90% 60% at 0% 100%,#D7E0FC 0%,rgba(215,224,252,0) 60%),radial-gradient(80% 60% at 100% 100%,#D3F4FC 0%,rgba(211,244,252,0) 60%),#FAFAFB">
+        <div style="height:72px;padding:0 40px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center">
+          <div style="display:flex;align-items:center;gap:9px"><div style="width:24px;height:24px;border-radius:8px;background:#0E1726;display:flex;align-items:center;justify-content:center"><div style="width:9px;height:9px;border-radius:9px;background:#fff"></div></div><span style="font-size:19px;font-weight:500;letter-spacing:-0.02em">Listly</span></div>
+          <div style="display:flex;gap:24px;font-size:14px"><div style="display:flex;flex-direction:column;gap:8px;width:120px"><div style="height:4px;border-radius:4px;background:#0E1726"></div><span style="color:#4A5363">1 Link</span></div><div style="display:flex;flex-direction:column;gap:8px;width:120px"><div style="height:4px;border-radius:4px;background:#0E1726"></div><span style="font-weight:500">2 Details</span></div><div style="display:flex;flex-direction:column;gap:8px;width:120px"><div style="height:4px;border-radius:4px;background:#DDE1E8"></div><span style="color:#6B7280">3 Review</span></div></div>
+          <div style="display:flex;justify-content:flex-end;align-items:center;gap:8px;font-size:14px;color:#6B7280">Draft saved<button style="height:44px;padding:0 18px;border-radius:999px;border:none;background:transparent;color:#4A5363;font:500 15px 'DM Sans',sans-serif">Exit</button></div>
+        </div>
+        <div style="flex:1;width:680px;margin:0 auto;padding-top:32px;display:flex;flex-direction:column;gap:22px">
+          <h1 style="margin:0;font-size:40px;font-weight:500;letter-spacing:-0.03em">Tell people what it is</h1>
+          <label style="display:flex;flex-direction:column;gap:8px"><span style="font-size:14px;font-weight:500">Name</span><span style="height:52px;border-radius:14px;border:1px solid #E3E6EB;background:#fff;padding:0 16px;display:flex;align-items:center;font-size:16px">Dhaka Streets — 40 Lightroom presets</span></label>
+          <label style="display:flex;flex-direction:column;gap:8px"><span style="font-size:14px;font-weight:500">One-line description</span><span style="height:52px;border-radius:14px;border:1px solid #E3E6EB;background:#fff;padding:0 16px;display:flex;align-items:center;font-size:16px">Warm, cinematic edits for city photos.</span></label>
+          <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px">
+            <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:14px;font-weight:500">Price</span>
+              <div style="display:flex;padding:4px;border-radius:999px;background:#EAEDF2"><span style="flex:1;height:44px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:15px;color:#4A5363">Free</span><span style="flex:1;height:44px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:500;background:#fff;box-shadow:0 1px 3px rgba(15,23,42,.1)">Paid</span></div>
+            </div>
+            <label style="display:flex;flex-direction:column;gap:8px"><span style="font-size:14px;font-weight:500">Amount</span><span style="height:52px;border-radius:14px;border:1px solid #E3E6EB;background:#fff;padding:0 8px 0 16px;display:flex;align-items:center;gap:10px;font-size:16px"><span style="flex:1">850</span><span style="height:36px;padding:0 12px;border-radius:10px;background:#F1F3F6;font-size:14px;display:flex;align-items:center;gap:6px">৳ BDT<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></span></label>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:14px;font-weight:500">Category <span style="font-weight:400;color:#6B7280">— suggested from your link</span></span>
+            <div style="display:flex;gap:8px;flex-wrap:wrap"><span style="height:40px;padding:0 16px;border-radius:999px;background:#0E1726;color:#fff;font-size:14px;font-weight:500;display:flex;align-items:center;gap:6px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Presets</span><span style="height:40px;padding:0 16px;border-radius:999px;background:#fff;border:1px solid #E6E8EC;font-size:14px;display:flex;align-items:center">Design assets</span><span style="height:40px;padding:0 16px;border-radius:999px;background:#fff;border:1px solid #E6E8EC;font-size:14px;display:flex;align-items:center">Courses</span><span style="height:40px;padding:0 16px;border-radius:999px;background:#fff;border:1px solid #E6E8EC;font-size:14px;display:flex;align-items:center">More…</span></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:14px;font-weight:500">Works with</span>
+            <div style="min-height:52px;border-radius:14px;border:1px solid #E3E6EB;background:#fff;padding:8px 12px;display:flex;align-items:center;gap:6px;flex-wrap:wrap"><span style="height:32px;padding:0 10px;border-radius:8px;background:#F1F3F6;font-size:14px;display:flex;align-items:center">Lightroom</span><span style="height:32px;padding:0 10px;border-radius:8px;background:#F1F3F6;font-size:14px;display:flex;align-items:center">Lightroom mobile</span><span style="font-size:15px;color:#6B7280;padding-left:6px">Add…</span></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:15px;font-weight:500;color:#4A5363;height:44px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>Add screenshots, what’s included, longer description <span style="font-weight:400;color:#6B7280">(optional)</span></div>
+        </div>
+        <div style="height:88px;padding:0 40px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,.8)">
+          <button style="height:52px;padding:0 20px;border-radius:999px;border:none;background:transparent;color:#4A5363;font:500 16px 'DM Sans',sans-serif">Back</button>
+          <button style="height:52px;padding:0 32px;border-radius:999px;border:none;background:#1D5BF0;color:#fff;font:500 16px 'DM Sans',sans-serif;box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 10px 22px -10px rgba(29,91,240,.75)">Continue</button>
+        </div>
+      </div>
+    </div>
+
+    <div data-screen-label="D4.3 Review" style="display:flex;flex-direction:column;gap:12px">
+      <div style="font-family:'DM Mono',monospace;font-size:12px;color:#6B7280">D4.3 — Review: your product page, as buyers see it</div>
+      <div style="width:1280px;height:820px;display:flex;flex-direction:column;border-radius:24px;overflow:hidden;border:1px solid #fff;box-shadow:0 40px 100px -40px rgba(20,35,80,.2);background:radial-gradient(90% 60% at 0% 100%,#D7E0FC 0%,rgba(215,224,252,0) 60%),radial-gradient(80% 60% at 100% 100%,#D3F4FC 0%,rgba(211,244,252,0) 60%),#FAFAFB">
+        <div style="height:72px;padding:0 40px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center">
+          <div style="display:flex;align-items:center;gap:9px"><div style="width:24px;height:24px;border-radius:8px;background:#0E1726;display:flex;align-items:center;justify-content:center"><div style="width:9px;height:9px;border-radius:9px;background:#fff"></div></div><span style="font-size:19px;font-weight:500;letter-spacing:-0.02em">Listly</span></div>
+          <div style="display:flex;gap:24px;font-size:14px"><div style="display:flex;flex-direction:column;gap:8px;width:120px"><div style="height:4px;border-radius:4px;background:#0E1726"></div><span style="color:#4A5363">1 Link</span></div><div style="display:flex;flex-direction:column;gap:8px;width:120px"><div style="height:4px;border-radius:4px;background:#0E1726"></div><span style="color:#4A5363">2 Details</span></div><div style="display:flex;flex-direction:column;gap:8px;width:120px"><div style="height:4px;border-radius:4px;background:#0E1726"></div><span style="font-weight:500">3 Review</span></div></div>
+          <div style="display:flex;justify-content:flex-end;align-items:center;gap:8px;font-size:14px;color:#6B7280">Draft saved<button style="height:44px;padding:0 18px;border-radius:999px;border:none;background:transparent;color:#4A5363;font:500 15px 'DM Sans',sans-serif">Exit</button></div>
+        </div>
+        <div style="flex:1;width:920px;margin:0 auto;padding-top:32px;display:flex;flex-direction:column;gap:20px">
+          <div style="display:flex;align-items:flex-end;justify-content:space-between"><div style="display:flex;flex-direction:column;gap:8px"><h1 style="margin:0;font-size:40px;font-weight:500;letter-spacing:-0.03em">Looks good?</h1><p style="margin:0;font-size:16px;color:#4A5363">Your page will live at <span style="font-family:'DM Mono',monospace;font-size:14px;color:#0E1726">listly.co/p/dhaka-streets</span></p></div><a href="#" style="font-size:15px;font-weight:500">Edit</a></div>
+          <div style="border-radius:24px;background:#fff;border:1px solid #fff;box-shadow:0 20px 50px -24px rgba(20,35,80,.22);padding:20px;display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:28px">
+            <div style="aspect-ratio:16/10;border-radius:16px;background:repeating-linear-gradient(135deg,#EDF0F5 0px,#EDF0F5 10px,#E6EAF1 10px,#E6EAF1 20px);display:flex;align-items:flex-end;padding:12px"><span style="font-family:'DM Mono',monospace;font-size:11px;color:#6B7280;background:rgba(255,255,255,.85);padding:3px 7px;border-radius:6px">cover</span></div>
+            <div style="display:flex;flex-direction:column;gap:14px;padding:6px 6px 6px 0">
+              <div style="font-size:24px;line-height:1.15;font-weight:500;letter-spacing:-0.02em">Dhaka Streets — 40 Lightroom presets</div>
+              <div style="font-size:15px;color:#4A5363">Warm, cinematic edits for city photos.</div>
+              <div style="font-size:22px;font-weight:500">৳850</div>
+              <div style="height:48px;border-radius:999px;background:#1D5BF0;color:#fff;font-size:15px;font-weight:500;display:flex;align-items:center;justify-content:center;gap:8px;opacity:.9">Get it on gumroad.com<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"></path></svg></div>
+              <div style="display:flex;gap:6px"><span style="height:28px;padding:0 10px;border-radius:8px;background:#F1F3F6;font-family:'DM Mono',monospace;font-size:12px;display:flex;align-items:center">XMP</span><span style="height:28px;padding:0 10px;border-radius:8px;background:#F1F3F6;font-family:'DM Mono',monospace;font-size:12px;display:flex;align-items:center">LIGHTROOM</span></div>
+            </div>
+          </div>
+        </div>
+        <div style="height:88px;padding:0 40px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,.8)">
+          <button style="height:52px;padding:0 20px;border-radius:999px;border:none;background:transparent;color:#4A5363;font:500 16px 'DM Sans',sans-serif">Back</button>
+          <div style="display:flex;align-items:center;gap:20px"><span style="font-size:14px;color:#6B7280">Free to list · no commission</span><button style="height:52px;padding:0 36px;border-radius:999px;border:none;background:#1D5BF0;color:#fff;font:500 16px 'DM Sans',sans-serif;box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 10px 22px -10px rgba(29,91,240,.75)">Publish</button></div>
+        </div>
+      </div>
+    </div>
+
+    <div data-screen-label="D4.4 Live" style="display:flex;flex-direction:column;gap:12px">
+      <div style="font-family:'DM Mono',monospace;font-size:12px;color:#6B7280">D4.4 — Live: the page link is the hero</div>
+      <div style="width:1280px;height:820px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;text-align:center;border-radius:24px;overflow:hidden;border:1px solid #fff;box-shadow:0 40px 100px -40px rgba(20,35,80,.2);background:radial-gradient(120% 90% at 0% 100%,#C9D6FB 0%,rgba(201,214,251,0) 55%),radial-gradient(100% 90% at 100% 100%,#C6F1FC 0%,rgba(198,241,252,0) 60%),#F3F6FD">
+        <div style="width:72px;height:72px;border-radius:999px;background:#fff;color:#1D5BF0;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 30px -12px rgba(29,91,240,.5)"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></div>
+        <h1 style="margin:8px 0 0;font-size:48px;line-height:1.05;font-weight:500;letter-spacing:-0.03em">Your product page is live</h1>
+        <p style="margin:0;font-size:17px;color:#4A5363">Share this link anywhere. Buyers land here, then go to your store.</p>
+        <div style="margin-top:8px;height:60px;width:520px;border-radius:999px;background:#fff;border:1px solid #E3E6EB;display:flex;align-items:center;gap:12px;padding:0 8px 0 24px"><span style="flex:1;text-align:left;font-family:'DM Mono',monospace;font-size:15px">listly.co/p/dhaka-streets</span><button style="height:44px;padding:0 20px;border-radius:999px;border:none;background:#0E1726;color:#fff;font:500 15px 'DM Sans',sans-serif">Copy</button></div>
+        <div style="display:flex;gap:10px">
+          <button style="height:44px;padding:0 18px;border-radius:999px;border:1px solid #E3E6EB;background:#fff;color:#0E1726;font:500 14px 'DM Sans',sans-serif">WhatsApp</button>
+          <button style="height:44px;padding:0 18px;border-radius:999px;border:1px solid #E3E6EB;background:#fff;color:#0E1726;font:500 14px 'DM Sans',sans-serif">Facebook</button>
+          <button style="height:44px;padding:0 18px;border-radius:999px;border:1px solid #E3E6EB;background:#fff;color:#0E1726;font:500 14px 'DM Sans',sans-serif">X</button>
+        </div>
+        <button style="margin-top:16px;height:52px;padding:0 32px;border-radius:999px;border:none;background:#1D5BF0;color:#fff;font:500 16px 'DM Sans',sans-serif;box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 10px 22px -10px rgba(29,91,240,.75)">View your page</button>
+        <button style="height:44px;padding:0 18px;border-radius:999px;border:none;background:transparent;color:#4A5363;font:500 15px 'DM Sans',sans-serif">List another</button>
+      </div>
+    </div>
+
+    <div data-screen-label="D5 My products" style="display:flex;flex-direction:column;gap:12px">
+      <div style="font-family:'DM Mono',monospace;font-size:12px;color:#6B7280">D5 — My products · views → clicks · link health</div>
+      <div style="width:1280px;border-radius:24px;overflow:hidden;background:#FAFAFB;border:1px solid #fff;box-shadow:0 40px 100px -40px rgba(20,35,80,.2)">
+        <div style="height:72px;padding:0 40px;display:flex;align-items:center;justify-content:space-between;gap:24px;border-bottom:1px solid #EEF0F3">
+          <div style="display:flex;align-items:center;gap:9px"><div style="width:24px;height:24px;border-radius:8px;background:#0E1726;display:flex;align-items:center;justify-content:center"><div style="width:9px;height:9px;border-radius:9px;background:#fff"></div></div><span style="font-size:19px;font-weight:500;letter-spacing:-0.02em">Listly</span></div>
+          <div style="display:flex;align-items:center;gap:16px"><span style="font-family:'DM Mono',monospace;font-size:13px;color:#4A5363">listly.co/@rumana</span><div style="width:40px;height:40px;border-radius:999px;background:#DCE4FB;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:500;color:#1447C4">RA</div></div>
+        </div>
+        <div style="max-width:1000px;margin:0 auto;padding:48px 0 64px;display:flex;flex-direction:column;gap:28px">
+          <div style="display:flex;align-items:flex-end;justify-content:space-between">
+            <div style="display:flex;flex-direction:column;gap:8px"><h1 style="margin:0;font-size:36px;font-weight:500;letter-spacing:-0.025em">My products</h1><span style="font-size:15px;color:#4A5363">2,056 page views and 501 link clicks in the last 30 days</span></div>
+            <button style="height:48px;padding:0 24px;border-radius:999px;border:none;background:#1D5BF0;color:#fff;font:500 15px 'DM Sans',sans-serif;box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 8px 18px -8px rgba(29,91,240,.7)">List a product</button>
+          </div>
+          <div style="border-radius:16px;background:#FDF6EC;border:1px solid #F3E2C6;padding:14px 16px 14px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px"><span style="font-size:15px;color:#5C3A00">The link for “Content calendar 2027” isn’t working. Buyers can’t reach it right now.</span><button style="height:40px;padding:0 16px;border-radius:999px;border:1px solid #E7C99A;background:#fff;color:#0E1726;font:500 14px 'DM Sans',sans-serif">Update link</button></div>
+          <div style="border-radius:20px;background:#fff;border:1px solid #E6E8EC;display:flex;flex-direction:column">
+            <div style="display:grid;grid-template-columns:96px minmax(0,1fr) 150px 90px 90px 44px;gap:20px;padding:14px 20px;font-size:13px;color:#6B7280"><span></span><span>Product</span><span>Status</span><span>Views</span><span>Clicks</span><span></span></div>
+            <sc-for list="{{ listings }}" as="l" hint-placeholder-count="4">
+              <div style="display:grid;grid-template-columns:96px minmax(0,1fr) 150px 90px 90px 44px;align-items:center;gap:20px;padding:14px 20px;border-top:1px solid #F0F2F5">
+                <div style="width:96px;aspect-ratio:4/3;border-radius:12px;background:repeating-linear-gradient(135deg,#EDF0F5 0px,#EDF0F5 8px,#E6EAF1 8px,#E6EAF1 16px)"></div>
+                <div style="display:flex;flex-direction:column;gap:4px;min-width:0"><span style="font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ l.title }}</span><span style="font-size:13px;color:#6B7280">{{ l.price }} · {{ l.domain }}</span></div>
+                <div>
+                  <sc-if value="{{ l.isLive }}" hint-placeholder-val="{{ true }}"><span style="height:26px;padding:0 10px;border-radius:999px;background:#EAF0FE;color:#1447C4;font-size:12px;font-weight:500;display:inline-flex;align-items:center">Live</span></sc-if>
+                  <sc-if value="{{ l.isDraft }}"><span style="height:26px;padding:0 10px;border-radius:999px;background:#EEF0F4;color:#4A5363;font-size:12px;font-weight:500;display:inline-flex;align-items:center">Draft</span></sc-if>
+                  <sc-if value="{{ l.isBroken }}"><span style="height:26px;padding:0 10px;border-radius:999px;background:#FDF1DF;color:#8A4B00;font-size:12px;font-weight:500;display:inline-flex;align-items:center">Link not working</span></sc-if>
+                </div>
+                <div style="font-size:15px">{{ l.views }}</div>
+                <div style="font-size:15px">{{ l.clicks }}</div>
+                <div style="width:44px;height:44px;border-radius:999px;display:flex;align-items:center;justify-content:center;color:#4A5363;cursor:pointer" style-hover="background:#F1F3F6"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.6"></circle><circle cx="12" cy="12" r="1.6"></circle><circle cx="19" cy="12" r="1.6"></circle></svg></div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="font-size:13px;color:#6B7280">“…” menu: Edit · Copy page link · Hide · Delete</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section data-screen-label="04 Mobile" style="padding:48px 80px 120px;display:flex;flex-direction:column;gap:24px">
+  <div style="font-family:'DM Mono',monospace;font-size:13px;color:#6B7280">04 — MOBILE · 390 · discover, product page, my products, and the listing flow</div>
+  <div style="display:flex;flex-wrap:wrap;gap:48px;align-items:flex-start">
+
+    <div data-screen-label="M1 Discover" style="display:flex;flex-direction:column;gap:12px">
+      <div style="font-family:'DM Mono',monospace;font-size:12px;color:#6B7280">M1 — Discover</div>
+      <div style="width:390px;height:844px;position:relative;border-radius:44px;overflow:hidden;background:#FAFAFB;border:1px solid #fff;box-shadow:0 40px 80px -30px rgba(20,35,80,.25)">
+        <div style="padding:0 20px 24px;background:radial-gradient(120% 90% at 0% 100%,#C9D6FB 0%,rgba(201,214,251,0) 60%),radial-gradient(100% 90% at 100% 100%,#C6F1FC 0%,rgba(198,241,252,0) 60%),#F3F6FD;border-radius:0 0 28px 28px">
+          <div style="height:48px;display:flex;align-items:center;justify-content:space-between;font-size:15px;font-weight:500;padding:0 8px">9:41<span style="width:24px;height:11px;border-radius:3px;border:1.5px solid #0E1726"></span></div>
+          <div style="height:56px;display:flex;align-items:center;justify-content:space-between">
+            <div style="display:flex;align-items:center;gap:9px"><div style="width:24px;height:24px;border-radius:8px;background:#0E1726;display:flex;align-items:center;justify-content:center"><div style="width:9px;height:9px;border-radius:9px;background:#fff"></div></div><span style="font-size:19px;font-weight:500;letter-spacing:-0.02em">Listly</span></div>
+            <div style="width:40px;height:40px;border-radius:999px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:500;color:#1447C4">RA</div>
+          </div>
+          <h1 style="margin:16px 0 20px;font-size:32px;line-height:1.1;font-weight:500;letter-spacing:-0.03em">Things people make.</h1>
+          <div style="height:56px;border-radius:999px;background:#fff;border:1px solid #E3E6EB;box-shadow:0 10px 24px -14px rgba(20,35,80,.25);display:flex;align-items:center;gap:10px;padding:0 20px;color:#6B7280;font-size:16px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>Templates, ebooks, presets…</div>
+        </div>
+        <div style="padding:20px 20px 0;display:flex;gap:8px;overflow:hidden">
+          <span style="flex:none;height:40px;padding:0 16px;border-radius:999px;background:#0E1726;color:#fff;font-size:14px;font-weight:500;display:flex;align-items:center">All</span>
+          <sc-for list="{{ catsM }}" as="c" hint-placeholder-count="4"><span style="flex:none;height:40px;padding:0 16px;border-radius:999px;background:#fff;border:1px solid #E6E8EC;font-size:14px;display:flex;align-items:center">{{ c }}</span></sc-for>
+        </div>
+        <div style="padding:24px 20px 12px;font-size:18px;font-weight:500">New this week</div>
+        <div style="padding:0 20px;display:grid;grid-template-columns:1fr 1fr;gap:24px 14px">
+          <sc-for list="{{ products4 }}" as="p" hint-placeholder-count="4">
+            <div style="display:flex;flex-direction:column;gap:3px">
+              <div style="aspect-ratio:4/3;border-radius:14px;margin-bottom:8px;background:repeating-linear-gradient(135deg,#EDF0F5 0px,#EDF0F5 8px,#E6EAF1 8px,#E6EAF1 16px);display:flex;align-items:flex-end;justify-content:flex-end;padding:6px"><span style="font-family:'DM Mono',monospace;font-size:10px;background:rgba(255,255,255,.92);padding:2px 6px;border-radius:5px">{{ p.format }}</span></div>
+              <div style="font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ p.title }}</div>
+              <div style="font-size:13px;color:#6B7280;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ p.creator }}</div>
+              <div style="font-size:15px;font-weight:500">{{ p.price }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="position:absolute;left:0;right:0;bottom:0;height:88px;padding-bottom:16px;background:rgba(255,255,255,.92);border-top:1px solid #EEF0F3;display:grid;grid-template-columns:repeat(4,1fr);align-items:center">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;color:#0E1726;font-size:12px;font-weight:500"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"></path></svg>Home</div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;color:#6B7280;font-size:12px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>Search</div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;color:#1D5BF0;font-size:12px;font-weight:500"><div style="width:30px;height:24px;border-radius:999px;background:#1D5BF0;color:#fff;display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></div>Sell</div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;color:#6B7280;font-size:12px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"></path></svg>Profile</div>
+        </div>
+      </div>
+    </div>
+
+    <div data-screen-label="M2 Product page" style="display:flex;flex-direction:column;gap:12px">
+      <div style="font-family:'DM Mono',monospace;font-size:12px;color:#6B7280">M2 — Product page</div>
+      <div style="width:390px;height:844px;position:relative;border-radius:44px;overflow:hidden;background:#FAFAFB;border:1px solid #fff;box-shadow:0 40px 80px -30px rgba(20,35,80,.25)">
+        <div style="height:300px;position:relative;background:repeating-linear-gradient(135deg,#EDF0F5 0px,#EDF0F5 10px,#E6EAF1 10px,#E6EAF1 20px)">
+          <div style="position:absolute;top:56px;left:16px;width:44px;height:44px;border-radius:999px;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg></div>
+          <div style="position:absolute;top:56px;right:16px;height:44px;padding:0 16px;border-radius:999px;background:rgba(255,255,255,.92);display:flex;align-items:center;font-size:14px;font-weight:500">Share</div>
+          <div style="position:absolute;bottom:16px;left:50%;transform:translateX(-50%);display:flex;gap:6px"><span style="width:18px;height:6px;border-radius:6px;background:#0E1726"></span><span style="width:6px;height:6px;border-radius:6px;background:rgba(14,23,38,.25)"></span><span style="width:6px;height:6px;border-radius:6px;background:rgba(14,23,38,.25)"></span><span style="width:6px;height:6px;border-radius:6px;background:rgba(14,23,38,.25)"></span></div>
+        </div>
+        <div style="padding:20px 20px 0;display:flex;flex-direction:column;gap:16px">
+          <div style="display:flex;flex-direction:column;gap:6px"><h1 style="margin:0;font-size:24px;line-height:1.2;font-weight:500;letter-spacing:-0.02em">Dhaka Streets — 40 Lightroom presets</h1><p style="margin:0;font-size:16px;color:#4A5363">Warm, cinematic edits for city photos.</p></div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #EEF0F3;border-bottom:1px solid #EEF0F3">
+            <div style="padding:12px 0;display:flex;flex-direction:column;gap:2px"><span style="font-size:12px;color:#6B7280">Works with</span><span style="font-size:14px">Lightroom</span></div>
+            <div style="padding:12px 0;display:flex;flex-direction:column;gap:2px"><span style="font-size:12px;color:#6B7280">Format</span><span style="font-size:14px">XMP, DNG</span></div>
+            <div style="padding:12px 0;display:flex;flex-direction:column;gap:2px"><span style="font-size:12px;color:#6B7280">Updated</span><span style="font-size:14px">Sep 2026</span></div>
+          </div>
+          <p style="margin:0;font-size:16px;line-height:1.6;color:#4A5363">Forty presets built from three years of shooting Old Dhaka at dusk. Tuned for phone photos as much as RAW.</p>
+          <div style="display:flex;align-items:center;gap:12px"><div style="width:40px;height:40px;border-radius:999px;background:#DCF3F9;display:flex;align-items:center;justify-content:center;font-weight:500;font-size:14px;color:#0B5A6E">TH</div><div style="flex:1;display:flex;flex-direction:column"><span style="font-size:15px;font-weight:500">Tanvir Hasan</span><span style="font-size:13px;color:#6B7280">6 products</span></div><a href="#" style="font-size:14px;font-weight:500">View</a></div>
+        </div>
+        <div style="position:absolute;left:0;right:0;bottom:0;padding:12px 20px 32px;background:rgba(255,255,255,.94);border-top:1px solid #EEF0F3;display:flex;align-items:center;gap:16px">
+          <div style="display:flex;flex-direction:column"><span style="font-size:20px;font-weight:500">৳850</span><span style="font-size:12px;color:#6B7280">on gumroad.com</span></div>
+          <button style="flex:1;height:52px;border-radius:999px;border:none;background:#1D5BF0;color:#fff;font:500 16px 'DM Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 10px 22px -10px rgba(29,91,240,.75)">Get it<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"></path></svg></button>
+        </div>
+      </div>
+    </div>
+
+    <div data-screen-label="M3 My products" style="display:flex;flex-direction:column;gap:12px">
+      <div style="font-family:'DM Mono',monospace;font-size:12px;color:#6B7280">M3 — My products</div>
+      <div style="width:390px;height:844px;position:relative;border-radius:44px;overflow:hidden;background:#FAFAFB;border:1px solid #fff;box-shadow:0 40px 80px -30px rgba(20,35,80,.25)">
+        <div style="height:48px;display:flex;align-items:center;justify-content:space-between;font-size:15px;font-weight:500;padding:0 28px">9:41<span style="width:24px;height:11px;border-radius:3px;border:1.5px solid #0E1726"></span></div>
+        <div style="padding:16px 20px 0;display:flex;flex-direction:column;gap:16px">
+          <h1 style="margin:0;font-size:30px;font-weight:500;letter-spacing:-0.025em">My products</h1>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <div style="border-radius:18px;padding:16px;border:1px solid #fff;background:radial-gradient(120% 120% at 0% 100%,#D3DDFB 0%,rgba(211,221,251,0) 70%),#F3F6FD;display:flex;flex-direction:column;gap:4px"><span style="font-size:13px;color:#4A5363">Page views · 30d</span><span style="font-size:26px;font-weight:500;letter-spacing:-0.02em">2,056</span></div>
+            <div style="border-radius:18px;padding:16px;border:1px solid #fff;background:radial-gradient(120% 120% at 100% 100%,#CDF2FC 0%,rgba(205,242,252,0) 70%),#F3F6FD;display:flex;flex-direction:column;gap:4px"><span style="font-size:13px;color:#4A5363">Link clicks · 30d</span><span style="font-size:26px;font-weight:500;letter-spacing:-0.02em">501</span></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <sc-for list="{{ listings }}" as="l" hint-placeholder-count="4">
+              <div style="border-radius:18px;background:#fff;border:1px solid #E6E8EC;padding:12px;display:flex;gap:12px;align-items:center">
+                <div style="flex:none;width:80px;height:60px;border-radius:10px;background:repeating-linear-gradient(135deg,#EDF0F5 0px,#EDF0F5 8px,#E6EAF1 8px,#E6EAF1 16px)"></div>
+                <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:4px">
+                  <span style="font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ l.title }}</span>
+                  <div style="display:flex">
+                    <sc-if value="{{ l.isLive }}" hint-placeholder-val="{{ true }}"><span style="font-size:13px;color:#4A5363">{{ l.views }} views · {{ l.clicks }} clicks</span></sc-if>
+                    <sc-if value="{{ l.isDraft }}"><span style="height:22px;padding:0 8px;border-radius:999px;background:#EEF0F4;color:#4A5363;font-size:12px;font-weight:500;display:inline-flex;align-items:center">Draft</span></sc-if>
+                    <sc-if value="{{ l.isBroken }}"><span style="height:22px;padding:0 8px;border-radius:999px;background:#FDF1DF;color:#8A4B00;font-size:12px;font-weight:500;display:inline-flex;align-items:center">Link not working · Fix</span></sc-if>
+                  </div>
+                </div>
+                <div style="flex:none;width:44px;height:44px;border-radius:999px;display:flex;align-items:center;justify-content:center;color:#4A5363"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.6"></circle><circle cx="12" cy="12" r="1.6"></circle><circle cx="19" cy="12" r="1.6"></circle></svg></div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="position:absolute;left:50%;bottom:108px;transform:translateX(-50%);white-space:nowrap;height:48px;padding:0 8px 0 20px;border-radius:999px;background:#0E1726;color:#fff;display:flex;align-items:center;gap:14px;font-size:14px;box-shadow:0 12px 30px -10px rgba(14,23,38,.5)"><span>Page link copied</span><span style="height:34px;padding:0 14px;border-radius:999px;background:rgba(255,255,255,.12);display:flex;align-items:center;font-weight:500">Share</span></div>
+        <div style="position:absolute;left:0;right:0;bottom:0;height:88px;padding-bottom:16px;background:rgba(255,255,255,.92);border-top:1px solid #EEF0F3;display:grid;grid-template-columns:repeat(4,1fr);align-items:center">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;color:#6B7280;font-size:12px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"></path></svg>Home</div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;color:#6B7280;font-size:12px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>Search</div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;color:#1D5BF0;font-size:12px;font-weight:500"><div style="width:30px;height:24px;border-radius:999px;background:#1D5BF0;color:#fff;display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></div>Sell</div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;color:#0E1726;font-size:12px;font-weight:500"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"></path></svg>Profile</div>
+        </div>
+      </div>
+    </div>
+
+    <div data-screen-label="M4.1 Link" style="display:flex;flex-direction:column;gap:12px">
+      <div style="font-family:'DM Mono',monospace;font-size:12px;color:#6B7280">M4.1 — Link</div>
+      <div style="width:390px;height:844px;position:relative;border-radius:44px;overflow:hidden;background:#FAFAFB;border:1px solid #fff;box-shadow:0 40px 80px -30px rgba(20,35,80,.25)">
+        <div style="height:48px"></div>
+        <div style="height:56px;padding:0 12px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center"><div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></div><span style="font-size:15px;font-weight:500">Step 1 of 3</span><span style="text-align:right;font-size:13px;color:#6B7280;padding-right:8px">Saved</span></div>
+        <div style="padding:0 20px;display:grid;grid-template-columns:repeat(3,1fr);gap:6px"><div style="height:4px;border-radius:4px;background:#0E1726"></div><div style="height:4px;border-radius:4px;background:#DDE1E8"></div><div style="height:4px;border-radius:4px;background:#DDE1E8"></div></div>
+        <div style="padding:28px 20px 0;display:flex;flex-direction:column;gap:20px">
+          <div style="display:flex;flex-direction:column;gap:6px"><h1 style="margin:0;font-size:30px;line-height:1.1;font-weight:500;letter-spacing:-0.025em">Where do people get it?</h1><p style="margin:0;font-size:16px;line-height:1.5;color:#4A5363">Paste your product link. We’ll fill in the rest.</p></div>
+          <label style="display:flex;flex-direction:column;gap:8px"><span style="font-size:14px;font-weight:500">Product link</span><span style="height:56px;border-radius:14px;border:1px solid #1D5BF0;box-shadow:0 0 0 4px rgba(29,91,240,.14);background:#fff;padding:0 16px;display:flex;align-items:center;font-size:16px;white-space:nowrap;overflow:hidden">tanvir.gumroad.com/l/dhaka-st…</span></label>
+          <div style="display:flex;align-items:center;gap:8px;font-size:14px;color:#1447C4"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Found it</div>
+          <div style="border-radius:20px;background:#fff;border:1px solid #EEF0F3;box-shadow:0 16px 36px -22px rgba(20,35,80,.3);overflow:hidden">
+            <div style="aspect-ratio:16/9;background:repeating-linear-gradient(135deg,#EDF0F5 0px,#EDF0F5 8px,#E6EAF1 8px,#E6EAF1 16px)"></div>
+            <div style="padding:14px;display:flex;flex-direction:column;gap:3px"><span style="font-size:13px;color:#6B7280">gumroad.com</span><span style="font-size:16px;font-weight:500">Dhaka Streets — 40 Lightroom presets</span><span style="font-size:15px">৳850</span></div>
+          </div>
+        </div>
+        <div style="position:absolute;left:0;right:0;bottom:0;padding:14px 20px 32px;background:rgba(255,255,255,.94);border-top:1px solid #EEF0F3"><button style="width:100%;height:52px;border-radius:999px;border:none;background:#1D5BF0;color:#fff;font:500 16px 'DM Sans',sans-serif;box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 10px 22px -10px rgba(29,91,240,.75)">Continue</button></div>
+      </div>
+    </div>
+
+    <div data-screen-label="M4.2 Details" style="display:flex;flex-direction:column;gap:12px">
+      <div style="font-family:'DM Mono',monospace;font-size:12px;color:#6B7280">M4.2 — Details</div>
+      <div style="width:390px;height:844px;position:relative;border-radius:44px;overflow:hidden;background:#FAFAFB;border:1px solid #fff;box-shadow:0 40px 80px -30px rgba(20,35,80,.25)">
+        <div style="height:48px"></div>
+        <div style="height:56px;padding:0 12px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center"><div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg></div><span style="font-size:15px;font-weight:500">Step 2 of 3</span><span style="text-align:right;font-size:13px;color:#6B7280;padding-right:8px">Saved</span></div>
+        <div style="padding:0 20px;display:grid;grid-template-columns:repeat(3,1fr);gap:6px"><div style="height:4px;border-radius:4px;background:#0E1726"></div><div style="height:4px;border-radius:4px;background:#0E1726"></div><div style="height:4px;border-radius:4px;background:#DDE1E8"></div></div>
+        <div style="padding:24px 20px 0;display:flex;flex-direction:column;gap:18px">
+          <h1 style="margin:0;font-size:30px;font-weight:500;letter-spacing:-0.025em">Tell people what it is</h1>
+          <label style="display:flex;flex-direction:column;gap:8px"><span style="font-size:14px;font-weight:500">Name</span><span style="height:52px;border-radius:14px;border:1px solid #E3E6EB;background:#fff;padding:0 16px;display:flex;align-items:center;font-size:16px;white-space:nowrap;overflow:hidden">Dhaka Streets — 40 Lightroom…</span></label>
+          <label style="display:flex;flex-direction:column;gap:8px"><span style="font-size:14px;font-weight:500">One-line description</span><span style="height:52px;border-radius:14px;border:1px solid #E3E6EB;background:#fff;padding:0 16px;display:flex;align-items:center;font-size:16px">Warm, cinematic city edits.</span></label>
+          <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:14px;font-weight:500">Price</span>
+            <div style="display:flex;gap:8px"><div style="flex:none;display:flex;padding:4px;border-radius:999px;background:#EAEDF2"><span style="height:44px;padding:0 16px;border-radius:999px;display:flex;align-items:center;font-size:15px;color:#4A5363">Free</span><span style="height:44px;padding:0 16px;border-radius:999px;display:flex;align-items:center;font-size:15px;font-weight:500;background:#fff;box-shadow:0 1px 3px rgba(15,23,42,.1)">Paid</span></div><span style="flex:1;height:52px;border-radius:14px;border:1px solid #E3E6EB;background:#fff;padding:0 14px;display:flex;align-items:center;gap:8px;font-size:16px"><span style="color:#6B7280">৳</span>850</span></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:14px;font-weight:500">Category</span><div style="display:flex;gap:8px;flex-wrap:wrap"><span style="height:40px;padding:0 16px;border-radius:999px;background:#0E1726;color:#fff;font-size:14px;font-weight:500;display:flex;align-items:center;gap:6px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Presets</span><span style="height:40px;padding:0 16px;border-radius:999px;background:#fff;border:1px solid #E6E8EC;font-size:14px;display:flex;align-items:center">Design assets</span><span style="height:40px;padding:0 16px;border-radius:999px;background:#fff;border:1px solid #E6E8EC;font-size:14px;display:flex;align-items:center">More…</span></div></div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:15px;font-weight:500;color:#4A5363;height:44px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>Screenshots &amp; more <span style="font-weight:400;color:#6B7280">(optional)</span></div>
+        </div>
+        <div style="position:absolute;left:0;right:0;bottom:0;padding:14px 20px 32px;background:rgba(255,255,255,.94);border-top:1px solid #EEF0F3"><button style="width:100%;height:52px;border-radius:999px;border:none;background:#1D5BF0;color:#fff;font:500 16px 'DM Sans',sans-serif;box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 10px 22px -10px rgba(29,91,240,.75)">Continue</button></div>
+      </div>
+    </div>
+
+    <div data-screen-label="M4.3 Review" style="display:flex;flex-direction:column;gap:12px">
+      <div style="font-family:'DM Mono',monospace;font-size:12px;color:#6B7280">M4.3 — Review &amp; publish</div>
+      <div style="width:390px;height:844px;position:relative;border-radius:44px;overflow:hidden;background:#FAFAFB;border:1px solid #fff;box-shadow:0 40px 80px -30px rgba(20,35,80,.25)">
+        <div style="height:48px"></div>
+        <div style="height:56px;padding:0 12px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center"><div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg></div><span style="font-size:15px;font-weight:500">Step 3 of 3</span><span style="text-align:right;font-size:13px;color:#6B7280;padding-right:8px">Saved</span></div>
+        <div style="padding:0 20px;display:grid;grid-template-columns:repeat(3,1fr);gap:6px"><div style="height:4px;border-radius:4px;background:#0E1726"></div><div style="height:4px;border-radius:4px;background:#0E1726"></div><div style="height:4px;border-radius:4px;background:#0E1726"></div></div>
+        <div style="padding:24px 20px 0;display:flex;flex-direction:column;gap:16px">
+          <div style="display:flex;flex-direction:column;gap:6px"><h1 style="margin:0;font-size:30px;font-weight:500;letter-spacing:-0.025em">Looks good?</h1><p style="margin:0;font-size:15px;color:#4A5363">listly.co/p/dhaka-streets</p></div>
+          <div style="border-radius:24px;background:#fff;box-shadow:0 20px 44px -24px rgba(20,35,80,.28);border:1px solid #EEF0F3;overflow:hidden">
+            <div style="aspect-ratio:16/10;position:relative;background:repeating-linear-gradient(135deg,#EDF0F5 0px,#EDF0F5 10px,#E6EAF1 10px,#E6EAF1 20px)"><span style="position:absolute;right:12px;top:12px;height:32px;padding:0 12px;border-radius:999px;background:rgba(255,255,255,.92);font-size:14px;font-weight:500;display:flex;align-items:center">Edit</span></div>
+            <div style="padding:16px;display:flex;flex-direction:column;gap:8px">
+              <div style="font-size:19px;font-weight:500;letter-spacing:-0.01em">Dhaka Streets — 40 Lightroom presets</div>
+              <div style="font-size:14px;color:#4A5363">Warm, cinematic city edits.</div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding-top:6px"><span style="font-size:18px;font-weight:500">৳850</span><span style="font-family:'DM Mono',monospace;font-size:12px;background:#F1F3F6;padding:4px 8px;border-radius:6px">XMP · LIGHTROOM</span></div>
+            </div>
+          </div>
+        </div>
+        <div style="position:absolute;left:0;right:0;bottom:0;padding:12px 20px 32px;background:rgba(255,255,255,.94);border-top:1px solid #EEF0F3;display:flex;flex-direction:column;gap:10px;align-items:center"><span style="font-size:13px;color:#6B7280">Free to list · no commission</span><button style="width:100%;height:52px;border-radius:999px;border:none;background:#1D5BF0;color:#fff;font:500 16px 'DM Sans',sans-serif;box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 10px 22px -10px rgba(29,91,240,.75)">Publish</button></div>
+      </div>
+    </div>
+
+    <div data-screen-label="M4.4 Live" style="display:flex;flex-direction:column;gap:12px">
+      <div style="font-family:'DM Mono',monospace;font-size:12px;color:#6B7280">M4.4 — Live</div>
+      <div style="width:390px;height:844px;position:relative;border-radius:44px;overflow:hidden;border:1px solid #fff;box-shadow:0 40px 80px -30px rgba(20,35,80,.25);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;padding:0 24px 80px;background:radial-gradient(120% 90% at 0% 100%,#C9D6FB 0%,rgba(201,214,251,0) 55%),radial-gradient(100% 90% at 100% 100%,#C6F1FC 0%,rgba(198,241,252,0) 60%),#F3F6FD">
+        <div style="width:72px;height:72px;border-radius:999px;background:#fff;color:#1D5BF0;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 30px -12px rgba(29,91,240,.5)"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></div>
+        <h1 style="margin:8px 0 0;font-size:32px;line-height:1.1;font-weight:500;letter-spacing:-0.03em">Your page is live</h1>
+        <p style="margin:0;font-size:16px;line-height:1.5;color:#4A5363">Share the link. Buyers land here, then go to your store.</p>
+        <div style="width:100%;height:56px;border-radius:999px;background:#fff;border:1px solid #E3E6EB;display:flex;align-items:center;gap:8px;padding:0 6px 0 18px"><span style="flex:1;text-align:left;font-family:'DM Mono',monospace;font-size:13px;white-space:nowrap;overflow:hidden">listly.co/p/dhaka-streets</span><button style="height:44px;padding:0 16px;border-radius:999px;border:none;background:#0E1726;color:#fff;font:500 14px 'DM Sans',sans-serif">Copy</button></div>
+        <div style="width:100%;display:grid;grid-template-columns:repeat(2,1fr);gap:8px">
+          <button style="height:48px;border-radius:999px;border:1px solid #E3E6EB;background:#fff;color:#0E1726;font:500 14px 'DM Sans',sans-serif">WhatsApp</button>
+          <button style="height:48px;border-radius:999px;border:1px solid #E3E6EB;background:#fff;color:#0E1726;font:500 14px 'DM Sans',sans-serif">Facebook</button>
+        </div>
+        <button style="margin-top:8px;width:100%;height:52px;border-radius:999px;border:none;background:#1D5BF0;color:#fff;font:500 16px 'DM Sans',sans-serif;box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 10px 22px -10px rgba(29,91,240,.75)">View your page</button>
+        <button style="height:44px;padding:0 18px;border-radius:999px;border:none;background:transparent;color:#4A5363;font:500 15px 'DM Sans',sans-serif">List another</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    const products = [
+      { title: 'Freelance invoice kit', creator: 'Rumana Akter', price: 'Free', format: 'NOTION', shot: 'template' },
+      { title: 'Dhaka Streets — 40 Lightroom presets', creator: 'Tanvir Hasan', price: '৳850', format: 'XMP', shot: 'presets' },
+      { title: 'শাপলা — Bangla display font', creator: 'Nabila Studio', price: '৳1,500', format: 'OTF', shot: 'type specimen' },
+      { title: 'Fintech UI kit, 120 screens', creator: 'Arif Design', price: '$24', format: 'FIGMA', shot: 'ui kit' },
+      { title: 'Spoken English in 30 days', creator: 'Mitu Rahman', price: '৳350', format: 'PDF', shot: 'ebook cover' },
+      { title: 'Lo-fi beats pack, vol. 2', creator: 'Sabbir Beats', price: '$9', format: 'WAV', shot: 'audio' },
+      { title: 'Freelancer tax guide, BD 2026', creator: 'Farhan Kabir', price: 'Free', format: 'PDF', shot: 'guide' },
+      { title: 'Minimal pitch deck', creator: 'Arif Design', price: '$12', format: 'KEYNOTE', shot: 'slides' }
+    ];
+    const more = [
+      { title: 'Monsoon Moods — 20 presets', price: '৳600', format: 'XMP' },
+      { title: 'Shooting at night: a field guide', price: '৳400', format: 'PDF' },
+      { title: 'Phone photography crash course', price: '৳1,200', format: 'VIDEO' },
+      { title: 'Film grain overlays', price: 'Free', format: 'PNG' }
+    ];
+    const listings = [
+      { title: 'Freelance invoice kit', price: 'Free', isLive: true, views: '1,204', clicks: '386', domain: 'gumroad.com' },
+      { title: 'Client onboarding system', price: '$15', isLive: true, views: '642', clicks: '97', domain: 'gumroad.com' },
+      { title: 'Content calendar 2027', price: '৳300', isBroken: true, views: '210', clicks: '18', domain: 'payhip.com' },
+      { title: 'Habit tracker, Bangla', price: 'Free', isDraft: true, views: '—', clicks: '—', domain: 'notion.site' }
+    ];
+    return {
+      products, products4: products.slice(0, 4), more,
+      creatorProducts: [{ title: 'Dhaka Streets — 40 Lightroom presets', price: '৳850', format: 'XMP' }, ...more, { title: 'Portrait retouch actions', price: '$8', format: 'ATN' }],
+      listings,
+      cats: ['Templates', 'Ebooks', 'Courses', 'Design assets', 'Fonts', 'Presets', 'Audio'],
+      catsM: ['Templates', 'Ebooks', 'Presets', 'Fonts']
+    };
+  }
+}
+</script>
+</body>
+</html>
